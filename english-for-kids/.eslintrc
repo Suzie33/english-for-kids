@@ -25,7 +25,7 @@
   },
   "extends": [
     "eslint:recommended",
-    "airbnb-base"
+    // "airbnb-base"
   ],
   "parserOptions": {
     "sourceType": "module"

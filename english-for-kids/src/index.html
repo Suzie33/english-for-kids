@@ -63,8 +63,30 @@
     </header>
     <main>
       <div class="container">
-        <section class="categories">
-          <ul class="categories__list">
+        <section class="cards">
+          <ul class="cards__list">
+            <li class="cards__item">
+              <div class="card">
+                <div class="card__front">
+                  <div class="card__image">
+                    <img src="../src/assets/img/horse.jpg" alt="" class="card__img">
+                  </div>
+                  <div class="card__desc">
+                    <h3 class="card__title">Horse</h3>
+                    <div class="card__rotate"></div>
+                  </div>
+                  <audio src="../src/assets/audio/horse.mp3" class="card__audio"></audio>
+                </div>
+                <div class="card__back">
+                  <div class="card__image">
+                    <img src="../src/assets/img/horse.jpg" alt="" class="card__img">
+                  </div>
+                  <div class="card__desc">
+                    <h3 class="card__translation">Лошадь</h3>
+                  </div>
+                </div>
+              </div>
+            </li>
           </ul>
         </section>
       </div>
@@ -88,10 +110,33 @@
     <template id="categoryTemplate">
       <div class="card">
         <div class="card__image">
-          <img src="../src/assets/img/animals1.png" alt="Animals1" class="card__img">
+          <img src="" alt="" class="card__img">
         </div>
         <div class="card__desc">
-          <h3 class="card__title">Animals 1</h3>
+          <h3 class="card__title"></h3>
+        </div>
+      </div>
+    </template>
+
+    <template id="cardTemplate">
+      <div class="card">
+        <div class="card__front">
+          <div class="card__image">
+            <img src="" alt="" class="card__img">
+          </div>
+          <div class="card__desc">
+            <h3 class="card__title"></h3>
+            <div class="card__rotate"></div>
+          </div>
+          <audio src="../src/assets/audio/horse.mp3" class="card__audio"></audio>
+        </div>
+        <div class="card__back">
+          <div class="card__image">
+            <img src="../src/assets/img/horse.jpg" alt="" class="card__img">
+          </div>
+          <div class="card__desc">
+            <h3 class="card__translation">Лошадь</h3>
+          </div>
         </div>
       </div>
     </template>

@@ -171,42 +171,63 @@
 }
 
 .cards__item {
-  max-width: 22%;
-  min-height: 250px;
+  width: 22%;
   margin-bottom: 40px;
 }
 
 .card {
-  background-color: #fff;
-  border-radius: 25px;
-  overflow: hidden;
-  padding-bottom: 15px;
-  box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.1);
-  transition: all .2s;
+  min-height: 245px;
+  position: relative;
+  transition: transform .5s;
+  perspective: 500px;
 
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 7px 19px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+
+.card__front,
+.card__back  {
+  position: absolute;
+  width: 100%;
+  top: 0; 
+  bottom: 0;
+  transition: transform .7s, box-shadow .3s;
+  backface-visibility: hidden;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card__front {
+  &:hover {
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+  }
+  &--rotate {
+    transform: rotateY(180deg);
   }
 }
 
 .card__back {
-  display: none;
+  transform: rotateY(180deg);
+
+  &--rotate {
+    transform: rotateY(360deg);
+  }
 }
 
 .card__desc {
-  padding: 0 20px;
+  padding: 15px 20px 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.card__image {
-  margin-bottom: 15px;
+  background-color: #fff;
 }
 
 .card__img {
+  border-radius: 25px 25px 0 0;
   width: 100%;
+  height: 180px;
   object-fit: cover;
 }
 
@@ -231,6 +252,11 @@
   background-size: cover;
   filter: grayscale(1);
   margin-left: auto;
+  transition: filter .3s;
+
+  &:hover {
+    filter: grayscale(0);
+  }
 }
 
 .nav {

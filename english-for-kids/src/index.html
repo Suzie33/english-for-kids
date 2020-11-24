@@ -49,7 +49,7 @@
         </ul>
         <div class = "logo">
           <h1 class="page-title">
-            <a href="#" class="logo__link">English for kids</a>
+            <a href="#" class="logo__link" id="page-title-text">English for kids</a>
           </h1>
         </div>
         <div class="toggle">
@@ -65,28 +65,6 @@
       <div class="container">
         <section class="cards">
           <ul class="cards__list">
-            <li class="cards__item">
-              <div class="card">
-                <div class="card__front">
-                  <div class="card__image">
-                    <img src="../src/assets/img/horse.jpg" alt="" class="card__img">
-                  </div>
-                  <div class="card__desc">
-                    <h3 class="card__title">Horse</h3>
-                    <div class="card__rotate"></div>
-                  </div>
-                  <audio src="../src/assets/audio/horse.mp3" class="card__audio"></audio>
-                </div>
-                <div class="card__back">
-                  <div class="card__image">
-                    <img src="../src/assets/img/horse.jpg" alt="" class="card__img">
-                  </div>
-                  <div class="card__desc">
-                    <h3 class="card__translation">Лошадь</h3>
-                  </div>
-                </div>
-              </div>
-            </li>
           </ul>
         </section>
       </div>
@@ -109,11 +87,13 @@
 
     <template id="categoryTemplate">
       <div class="card">
-        <div class="card__image">
-          <img src="" alt="" class="card__img">
-        </div>
-        <div class="card__desc">
-          <h3 class="card__title"></h3>
+        <div class="card__front">
+          <div class="card__image">
+            <img src="" alt="" class="card__img">
+          </div>
+          <div class="card__desc">
+            <h3 class="card__title"></h3>
+          </div>
         </div>
       </div>
     </template>
@@ -128,7 +108,7 @@
             <h3 class="card__title"></h3>
             <div class="card__rotate"></div>
           </div>
-          <audio src="../src/assets/audio/horse.mp3" class="card__audio"></audio>
+          <audio src="" class="card__audio"></audio>
         </div>
         <div class="card__back">
           <div class="card__image">

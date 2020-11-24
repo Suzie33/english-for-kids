@@ -30,6 +30,18 @@ body {
   margin: 0 auto;
   max-width: 1400px;
   width: 93.75%;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 *, ::before, ::after {

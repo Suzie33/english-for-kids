@@ -3,9 +3,6 @@
 @import "./media.scss";
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 30px;
   padding-top: 25px;
   color: #FF6E40;
@@ -260,5 +257,51 @@
     &:hover {
       transform: scale(1);
     }
+  }
+}
+
+.footer {
+  padding: 15px 0;
+  background-color: #FF6E40;
+  color: #fff;
+  font-family: Montserrat, Arial, sans-serif;
+  
+}
+
+.footer__author {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.footer__link {
+  display: flex;
+  align-items: center;
+  transition: .3s;
+
+  &:hover {
+    opacity: .7;
+  }
+}
+
+.footer__link-img {
+  width: 25px;
+  height: 25px;
+
+  &--rsschool {
+    width: 60px;
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .2);
+  display: none;
+
+  &--visible {
+    display: block;
   }
 }

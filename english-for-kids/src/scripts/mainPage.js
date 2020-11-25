@@ -1,6 +1,7 @@
 import Cards from './cards';
 import categoryInstance from './category';
 import menuInstance from './menu';
+import Icon from '../assets/img/icons/abc.png';
 
 const categoryCardTemplate = document.querySelector('#categoryTemplate');
 const cardsList = document.querySelector('.cards__list');
@@ -8,6 +9,13 @@ const pageTitle = document.querySelector('#page-title-text');
 const categoriesArr = Cards[0];
 
 class MainPage {
+  init() {
+    const appIcon = document.createElement('link');
+    appIcon.rel = 'icon';
+    appIcon.href = Icon;
+    document.querySelector('head').append(appIcon);
+  }
+
   loadMainPage() {
     pageTitle.textContent = 'English for kids';
     cardsList.innerHTML = '';
@@ -33,6 +41,7 @@ class MainPage {
 }
 
 const mainPage = new MainPage();
+mainPage.init();
 mainPage.loadMainPage();
 
 export default mainPage;

@@ -5,7 +5,7 @@ const cardsList = document.querySelector('.cards__list');
 const pageTitle = document.querySelector('#page-title-text');
 const cardsArr = Cards[1];
 
-export default class Category {
+class Category {
   loadCategoryPage(category) {
     pageTitle.textContent = `${category.title}`;
     cardsList.innerHTML = '';
@@ -50,3 +50,6 @@ export default class Category {
     })
   }
 }
+
+const categoryInstance = new Category();
+export default categoryInstance;

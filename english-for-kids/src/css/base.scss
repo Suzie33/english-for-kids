@@ -2,6 +2,11 @@ html, body {
   height: 100%;
 }
 
+html::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -13,6 +18,7 @@ body {
   font-size: 15px;
   color: #FF3D00;
   line-height: 1.6;
+  transition: all .3s;
 }
 
 .noScroll {
@@ -24,6 +30,10 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  &__content {
+    flex: 1;
+  }
 }
 
 .container {

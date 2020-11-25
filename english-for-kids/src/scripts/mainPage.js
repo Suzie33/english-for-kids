@@ -1,27 +1,38 @@
 import Cards from './cards';
-import Category from './category';
+import categoryInstance from './category';
+import menuInstance from './menu';
 
 const categoryCardTemplate = document.querySelector('#categoryTemplate');
 const cardsList = document.querySelector('.cards__list');
+const pageTitle = document.querySelector('#page-title-text');
 const categoriesArr = Cards[0];
 
-categoriesArr.forEach((category) => {
-  const categoryCard = document.createElement('li');
-  categoryCard.classList.add('cards__item');
-  categoryCard.append(categoryCardTemplate.content.cloneNode(true));
+class MainPage {
+  loadMainPage() {
+    pageTitle.textContent = 'English for kids';
+    cardsList.innerHTML = '';
 
-  const cardImg = categoryCard.querySelector('.card__img');
-  cardImg.setAttribute('src', `${category.img}`);
-  const cardTitle = categoryCard.querySelector('.card__title');
-  cardTitle.textContent = `${category.title}`;
+    categoriesArr.forEach((category) => {
+      const categoryCard = document.createElement('li');
+      categoryCard.classList.add('cards__item');
+      categoryCard.append(categoryCardTemplate.content.cloneNode(true));
+    
+      const cardImg = categoryCard.querySelector('.card__img');
+      cardImg.setAttribute('src', `${category.img}`);
+      const cardTitle = categoryCard.querySelector('.card__title');
+      cardTitle.textContent = `${category.title}`;
+    
+      categoryCard.addEventListener('click', () => {
+        categoryInstance.loadCategoryPage(category);
+        menuInstance.changeActiveLink(category.title);
+      })
+    
+      cardsList.append(categoryCard);
+    });
+  }
+}
 
-  categoryCard.addEventListener('click', () => {
-    const categoryCurrent = new Category();
+const mainPage = new MainPage();
+mainPage.loadMainPage();
 
-    categoryCurrent.loadCategoryPage(category);
-  })
-
-  cardsList.append(categoryCard);
-});
-
-
+export default mainPage;

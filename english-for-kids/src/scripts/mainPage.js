@@ -2,9 +2,11 @@ import Cards from './cards';
 import categoryInstance from './category';
 import menuInstance from './menu';
 import Icon from '../assets/img/icons/abc.png';
+import state from './state';
 
+const container = document.querySelector('#main-container');
 const categoryCardTemplate = document.querySelector('#categoryTemplate');
-const cardsList = document.querySelector('.cards__list');
+// const cardsList = document.querySelector('.cards__list');
 const pageTitle = document.querySelector('#page-title-text');
 const categoriesArr = Cards[0];
 
@@ -17,8 +19,12 @@ class MainPage {
   }
 
   loadMainPage() {
+    state.page = 0;
     pageTitle.textContent = 'English for kids';
-    cardsList.innerHTML = '';
+    container.innerHTML = '';
+
+    const categoriesList = document.createElement('ul');
+    categoriesList.classList.add('cards__list');
 
     categoriesArr.forEach((category) => {
       const categoryCard = document.createElement('li');
@@ -35,7 +41,8 @@ class MainPage {
         menuInstance.changeActiveLink(category.title);
       })
     
-      cardsList.append(categoryCard);
+      categoriesList.append(categoryCard);
+      container.append(categoriesList);
     });
   }
 }

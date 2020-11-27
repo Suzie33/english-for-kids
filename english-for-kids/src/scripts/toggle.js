@@ -7,5 +7,8 @@ toggle.addEventListener('change', (e) => {
   e.stopPropagation();
 
   state.play = !state.play;
-  categoryInstance.changeMode(state.play);
+
+  if (state.page !== 0) {
+    categoryInstance.changeMode(state.play);
+  }
 })

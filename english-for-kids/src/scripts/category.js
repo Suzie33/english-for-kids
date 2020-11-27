@@ -1,15 +1,30 @@
 import Cards from './cards';
 import state from './state';
 
+const container = document.querySelector('#main-container');
 const cardTemplate = document.querySelector('#cardTemplate');
-const cardsList = document.querySelector('.cards__list');
+// const cardsList = document.querySelector('.cards__list');
 const pageTitle = document.querySelector('#page-title-text');
 const cardsArr = Cards[1];
+const btnsTemplate = document.querySelector('#btnsTemplate');
 
 class Category {
+  constructor () {
+    this.btns = null;
+    this.stars = null;
+    this.wordCards = null;
+    this.cardsList = null;
+  }
+
   loadCategoryPage(category) {
+    state.page = category.index + 1;
+    container.classList.add('container--category');
     pageTitle.textContent = `${category.title}`;
-    cardsList.innerHTML = '';
+    container.innerHTML = '';
+
+    //render cards
+    this.cardsList = document.createElement('ul');
+    this.cardsList.classList.add('cards__list');
 
     const wordsList = cardsArr[category.index];
 
@@ -33,7 +48,9 @@ class Category {
       const cardBack = wordCard.querySelector('.card__back');
 
       cardFront.addEventListener('click', () => {
-        cardAudio.play();
+        if (!state.play) {
+          cardAudio.play();
+        }
       });
 
       rotateCardBtn.addEventListener('click', (e) => {
@@ -47,28 +64,49 @@ class Category {
         cardBack.classList.remove('card__back--rotate');
       })
 
-      cardsList.append(wordCard);
+      this.cardsList.append(wordCard);
+      container.append(this.cardsList);
     })
     
+    this.wordCards = this.cardsList.querySelectorAll('.card--word');
+    
     if (state.play) {
-      const cards = cardsList.querySelectorAll('.card--word');
-      
-      cards.forEach(card => {
+      this.wordCards.forEach(card => {
         card.classList.add('card--play');
       })
+    }
+
+    //render additional elements
+    this.stars = document.createElement('ul');
+    this.stars.classList.add('stars');
+    container.insertBefore(this.stars, container.firstChild);
+
+    container.insertBefore(btnsTemplate.content.cloneNode(true), container.firstChild);
+    this.btns = container.querySelector('.buttons');
+
+    if (!state.play) {
+      this.btns.classList.add('buttons--hidden');
+      this.stars.classList.add('stars--hidden');
     }
   }
 
   changeMode(mode) {
-    const cards = cardsList.querySelectorAll('.card--word');
-
-    cards.forEach(card => {
+    console.log(this.wordCards);
+    this.wordCards.forEach(card => {
       if (mode) {
         card.classList.add('card--play');
       } else {
         card.classList.remove('card--play');
       }
     })
+
+    if (mode && container.classList.contains('container--category')) {
+      this.btns.classList.remove('buttons--hidden');
+      this.stars.classList.remove('stars--hidden');
+    } else if (!mode && container.classList.contains('container--category')) {
+      this.btns.classList.add('buttons--hidden');
+      this.stars.classList.add('stars--hidden');
+    }
   }
 }
 

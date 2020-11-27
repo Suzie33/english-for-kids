@@ -3,7 +3,7 @@
 @import "./base.scss";
 
 .header {
-  margin-bottom: 60px;
+  margin-bottom: 45px;
   padding-top: 25px;
   color: #FF7B40;
 
@@ -264,7 +264,7 @@
   width: 100%;
   top: 0; 
   bottom: 0;
-  transition: transform .7s, box-shadow .3s;
+  transition: transform .6s, box-shadow .3s;
   backface-visibility: hidden;
   border-radius: 25px;
   overflow: hidden;
@@ -451,4 +451,67 @@
   &--visible {
     display: block;
   }
+}
+
+.buttons {
+  text-align: center;
+  margin-bottom: 20px;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    text-transform: uppercase;
+    font-family: Montserrat, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 16px 25px;
+    background: linear-gradient(40deg,#B564D4,#FF6E40);
+    color: #fff;
+    border-radius: 10px;
+    outline: none;
+    transition: .2s;
+
+    &:hover {
+      box-shadow: 0px 4px 16px rgba(0,0,0,0.25);
+    }
+  }
+
+  &--hidden {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    }
+}
+
+.stars {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  height: 30px;
+  margin-bottom: 15px;
+  padding-right: 3%;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.star,
+.star--error {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  flex-shrink: 0;
+  background-size: contain;
+  background-position: center;
+  background-image: url('../assets/img/icons/star.svg');
+}
+
+.star--error {
+  background-image: url('../assets/img/icons/star_error.svg');
 }

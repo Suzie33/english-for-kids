@@ -48,6 +48,7 @@ body {
 
     @include phones {
       flex-wrap: wrap;
+      row-gap: 15px;
     }
   }
 

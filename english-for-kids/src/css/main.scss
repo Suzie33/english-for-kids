@@ -13,6 +13,7 @@
 
   @include phones {
     padding-top: 10px;
+    margin-bottom: 20px;
   }
 }
 
@@ -21,10 +22,6 @@
     margin: 0 auto;
     min-width: 240px;
     text-align: center;
-  }
-
-  @include phones {
-    margin-bottom: 15px;
   }
 }
 
@@ -42,10 +39,6 @@
 
   @include bigPhones {
     margin-right: 10px;
-  }
-
-  @include phones {
-    margin-bottom: 15px;
   }
 }
 
@@ -126,6 +119,10 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  @include phones {
+    transform: scale(.9);
+  }
 }
 
 .toggle__input {
@@ -140,7 +137,7 @@
   cursor: pointer;
   outline: none;
   user-select: none;
-  width: 120px;
+  width: 145px;
   height: 45px;
   background-color: #dddddd;
   border-radius: 25px;
@@ -169,13 +166,14 @@
     background-color: #fff;
     border-radius: 100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin-left: 75px;
+    margin-left: 100px;
     transition: margin 0.4s;
   }
 }
 
 .toggle__mode {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -189,6 +187,21 @@
   }
 }
 
+.toggle__mode-icon {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+
+  &--train {
+    background: url('../assets/img/icons/train2.png') no-repeat 50% 50%/cover;
+  }
+
+  &--play {
+    margin-left: 9px;
+    background: transparent url('../assets/img/icons/play.webp') no-repeat 50% 50%/cover;
+  }
+}
+
 .toggle__input:checked + .toggle__label::before {
   background-color: #FF9473;
 }
@@ -198,8 +211,12 @@
 }
 
 .toggle__input:checked + .toggle__label .toggle__mode--play {
+  display: flex;
+  left: 58px;
+}
+
+.toggle__input:checked + .toggle__label .toggle__mode-icon--play {
   display: inline-block;
-  left: 61px;
 }
 
 .toggle__input:checked + .toggle__label .toggle__mode--train {
@@ -320,6 +337,17 @@
 
   &:hover {
     filter: grayscale(0);
+  }
+}
+
+.card--play {
+  & .card__desc {
+    display: none;
+  }
+
+  & .card__img,
+  & .card__image {
+    height: 100%;
   }
 }
 

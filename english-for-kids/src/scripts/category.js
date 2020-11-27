@@ -1,4 +1,5 @@
 import Cards from './cards';
+import state from './state';
 
 const cardTemplate = document.querySelector('#cardTemplate');
 const cardsList = document.querySelector('.cards__list');
@@ -47,6 +48,26 @@ class Category {
       })
 
       cardsList.append(wordCard);
+    })
+    
+    if (state.play) {
+      const cards = cardsList.querySelectorAll('.card--word');
+      
+      cards.forEach(card => {
+        card.classList.add('card--play');
+      })
+    }
+  }
+
+  changeMode(mode) {
+    const cards = cardsList.querySelectorAll('.card--word');
+
+    cards.forEach(card => {
+      if (mode) {
+        card.classList.add('card--play');
+      } else {
+        card.classList.remove('card--play');
+      }
     })
   }
 }

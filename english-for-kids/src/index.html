@@ -26,11 +26,15 @@
                 <a href="#" class="logo__link" id="page-title-text">English for kids</a>
               </h1>
             </div>
-            <div class="toggle">
+            <div class="toggle" id="toggle">
               <input type="checkbox" id="toggle-input" class="toggle__input">
               <label for="toggle-input" class="toggle__label">
-                <span class="toggle__mode toggle__mode--train">Train</span>
-                <span class="toggle__mode toggle__mode--play">Play</span>
+                <span class="toggle__mode toggle__mode--train">Train
+                  <span class="toggle__mode-icon toggle__mode-icon--train"></span>
+                </span>
+
+                <span class="toggle__mode toggle__mode--play">Play
+                  <span class="toggle__mode-icon toggle__mode-icon--play"></span></span>
               </label>
             </div>
           </div>
@@ -75,7 +79,7 @@
     </template>
 
     <template id="cardTemplate">
-      <div class="card">
+      <div class="card card--word">
         <div class="card__front">
           <div class="card__image">
             <img src="" alt="" class="card__img">

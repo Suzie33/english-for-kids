@@ -3,7 +3,6 @@ import state from './state';
 
 const container = document.querySelector('#main-container');
 const cardTemplate = document.querySelector('#cardTemplate');
-// const cardsList = document.querySelector('.cards__list');
 const pageTitle = document.querySelector('#page-title-text');
 const cardsArr = Cards[1];
 const btnsTemplate = document.querySelector('#btnsTemplate');
@@ -11,9 +10,11 @@ const btnsTemplate = document.querySelector('#btnsTemplate');
 class Category {
   constructor () {
     this.btns = null;
+    this.startButton = null;
     this.stars = null;
     this.wordCards = null;
     this.cardsList = null;
+    this.audioList = [];
   }
 
   loadCategoryPage(category) {
@@ -23,6 +24,7 @@ class Category {
     container.innerHTML = '';
 
     //render cards
+    this.audioList = [];
     this.cardsList = document.createElement('ul');
     this.cardsList.classList.add('cards__list');
 
@@ -39,6 +41,8 @@ class Category {
       })
       const cardAudio = wordCard.querySelector('.card__audio');
       cardAudio.setAttribute('src', `${word.audioSrc}`);
+      this.audioList.push(cardAudio);
+
       const cardTitle = wordCard.querySelector('.card__title');
       cardTitle.textContent = `${word.word}`;
       const cardTranslation = wordCard.querySelector('.card__translation');
@@ -74,6 +78,8 @@ class Category {
       this.wordCards.forEach(card => {
         card.classList.add('card--play');
       })
+      this.generateRandomArr();
+      console.log(state.randomArr);
     }
 
     //render additional elements
@@ -81,8 +87,7 @@ class Category {
     this.stars.classList.add('stars');
     container.insertBefore(this.stars, container.firstChild);
 
-    container.insertBefore(btnsTemplate.content.cloneNode(true), container.firstChild);
-    this.btns = container.querySelector('.buttons');
+    this.renderBtns();
 
     if (!state.play) {
       this.btns.classList.add('buttons--hidden');
@@ -90,8 +95,25 @@ class Category {
     }
   }
 
+  renderBtns () {
+    container.insertBefore(btnsTemplate.content.cloneNode(true), container.firstChild);
+    this.btns = container.querySelector('.buttons');
+
+    this.startButton = document.querySelector('.buttons__btn');
+
+    this.startButton.addEventListener('click', () => {
+      if (this.startButton.classList.contains('buttons__repeat') === false) {
+        this.startButton.classList.add('buttons__repeat');
+
+        const event = new Event("gameStarted", {bubbles: true});
+        this.startButton.dispatchEvent(event);
+      } else {
+        state.randomArr[state.currentCard].play();
+      }
+    })
+  }
+
   changeMode(mode) {
-    console.log(this.wordCards);
     this.wordCards.forEach(card => {
       if (mode) {
         card.classList.add('card--play');
@@ -107,6 +129,19 @@ class Category {
       this.btns.classList.add('buttons--hidden');
       this.stars.classList.add('stars--hidden');
     }
+
+    if (mode) {
+      this.startButton.classList.remove('buttons__repeat');
+      this.generateRandomArr();
+    }
+  }
+
+  generateRandomArr () {
+    const arr = this.audioList;
+    const randomArr = arr.sort(() => Math.random() - 0.5);
+    this.audioList = randomArr;
+
+    state.randomArr = randomArr;
   }
 }
 

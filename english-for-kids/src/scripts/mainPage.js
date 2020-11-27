@@ -6,7 +6,6 @@ import state from './state';
 
 const container = document.querySelector('#main-container');
 const categoryCardTemplate = document.querySelector('#categoryTemplate');
-// const cardsList = document.querySelector('.cards__list');
 const pageTitle = document.querySelector('#page-title-text');
 const categoriesArr = Cards[0];
 

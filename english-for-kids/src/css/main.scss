@@ -484,7 +484,23 @@
     font-size: 0;
     margin: 0;
     padding: 0;
+  }
+
+  &__repeat {
+    width: 65px;
+    height: 65px;
+    font-size: 0;
+    background-image: url('../assets/img/icons/repeat.svg'), linear-gradient(40deg,#B564D4,#FF6E40);
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: 32px 32px, cover;
+    background-position: 50%;
+    transition: .3s;
+
+    & .toggle__mode-icon {
+      display: none;
     }
+  }
 }
 
 .stars {

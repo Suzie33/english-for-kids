@@ -4,6 +4,7 @@ const state = {
   gameActive: false,
   randomArr: [],
   currentCard: 0,
+  gameErrors: 0
 }
 
 export default state;

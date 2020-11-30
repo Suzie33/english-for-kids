@@ -55,6 +55,11 @@ class Category {
         if (!state.play) {
           cardAudio.play();
         }
+        if (state.play && state.gameActive) {
+          const event = new CustomEvent("cardClicked", {bubbles: true,
+            detail: { wordCard },});
+          wordCard.dispatchEvent(event);
+        }
       });
 
       rotateCardBtn.addEventListener('click', (e) => {
@@ -63,7 +68,7 @@ class Category {
         cardBack.classList.add('card__back--rotate');
       })
 
-      cardBack.addEventListener('mouseleave', () => {
+      wordCard.addEventListener('mouseleave', () => {
         cardFront.classList.remove('card__front--rotate');
         cardBack.classList.remove('card__back--rotate');
       })
@@ -79,7 +84,6 @@ class Category {
         card.classList.add('card--play');
       })
       this.generateRandomArr();
-      console.log(state.randomArr);
     }
 
     //render additional elements
@@ -105,7 +109,7 @@ class Category {
       if (this.startButton.classList.contains('buttons__repeat') === false) {
         this.startButton.classList.add('buttons__repeat');
 
-        const event = new Event("gameStarted", {bubbles: true});
+        const event = new CustomEvent("gameStarted", {bubbles: true});
         this.startButton.dispatchEvent(event);
       } else {
         state.randomArr[state.currentCard].play();

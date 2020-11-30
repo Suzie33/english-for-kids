@@ -8,6 +8,8 @@ const container = document.querySelector('#main-container');
 const categoryCardTemplate = document.querySelector('#categoryTemplate');
 const pageTitle = document.querySelector('#page-title-text');
 const categoriesArr = Cards[0];
+const header = document.querySelector('.header');
+const footer = document.querySelector('.footer');
 
 class MainPage {
   init() {
@@ -18,6 +20,8 @@ class MainPage {
   }
 
   loadMainPage() {
+    header.style.visibility = 'visible';
+    footer.style.visibility = 'visible';
     state.page = 0;
     pageTitle.textContent = 'English for kids';
     container.innerHTML = '';

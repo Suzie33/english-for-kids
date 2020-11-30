@@ -535,3 +535,21 @@
 .star--error {
   background-image: url('../assets/img/icons/star_error.svg');
 }
+
+.game-success,
+.game-failure {
+  margin: 0 auto;
+  height: 55vh;
+  background: transparent url(../assets/img/success.png) no-repeat 50% 50%;
+  background-size: contain;
+}
+
+.game-failure {
+  background-image: url(../assets/img/failure.png);
+}
+
+.game-info {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+}

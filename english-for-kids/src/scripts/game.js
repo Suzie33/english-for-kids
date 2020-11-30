@@ -1,9 +1,13 @@
 import state from './state';
+import mainPage from './mainPage';
 
 const audioError = document.querySelector('.audio-error');
 const audioCorrect = document.querySelector('.audio-correct');
 const audioSuccess = document.querySelector('.audio-success');
 const audioFailure = document.querySelector('.audio-failure');
+const container = document.querySelector('#main-container');
+const header = document.querySelector('.header');
+const footer = document.querySelector('.footer');
 
 class Game {
   init () {
@@ -54,13 +58,40 @@ class Game {
   }
 
   finishGame () {
+    header.style.visibility = 'hidden';
+    footer.style.visibility = 'hidden';
+    container.innerHTML = '';
+
+    const gameResult = document.createElement('div');
+    const gamePicture = document.createElement('div');
+    const gameInfo = document.createElement('div');
+    gameResult.classList.add('game-result');
+    gameInfo.classList.add('game-info');
+
     if (state.gameErrors === 0) {
       audioSuccess.play();
+
+      gameInfo.textContent = `You did it!`;
+      gamePicture.classList.add('game-success');
+      gameResult.append(gameInfo);
+      gameResult.append(gamePicture);
     } else {
       audioFailure.play();
+
+      gameInfo.textContent = `You made ${state.gameErrors} mistakes. Try again!`;
+      gamePicture.classList.add('game-failure');
+      gameResult.append(gameInfo);
+      gameResult.append(gamePicture);
     }
-    console.log(state.gameErrors);
+    container.append(gameResult);
+
+    setTimeout(mainPage.loadMainPage, 5000);
+    state.gameActive = false;
+    state.randomArr = [];
+    state.currentCard = 0;
+    state.gameErrors = 0;
   }
+
 }
 
 const game = new Game();

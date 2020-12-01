@@ -85,7 +85,7 @@ class Game {
     }
     container.append(gameResult);
 
-    setTimeout(mainPage.loadMainPage, 5000);
+    setTimeout(mainPage.loadMainPage, 4000);
     state.gameActive = false;
     state.randomArr = [];
     state.currentCard = 0;

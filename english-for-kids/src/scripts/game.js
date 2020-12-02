@@ -28,6 +28,9 @@ class Game {
           state.currentCard++;
           this.addStar('star');
 
+          e.detail.word.correct += 1;
+          localStorage.setItem('statistics', JSON.stringify(e.detail.cardsArr));
+
           if (this.isGameFinished()) {
             setTimeout(this.finishGame, 500);
           } else {
@@ -37,6 +40,8 @@ class Game {
           audioError.play();
           this.addStar('star--error');
           state.gameErrors++;
+          e.detail.word.errors += 1;
+          localStorage.setItem('statistics', JSON.stringify(e.detail.cardsArr));
         }
       }
     })

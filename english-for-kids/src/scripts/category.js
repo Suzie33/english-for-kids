@@ -4,8 +4,14 @@ import state from './state';
 const container = document.querySelector('#main-container');
 const cardTemplate = document.querySelector('#cardTemplate');
 const pageTitle = document.querySelector('#page-title-text');
-const cardsArr = Cards[1];
+let cardsArr = Cards[1];
 const btnsTemplate = document.querySelector('#btnsTemplate');
+
+if (localStorage.getItem('statistics')) {
+  cardsArr = JSON.parse(localStorage.getItem('statistics'));
+} else {
+  localStorage.setItem('statistics', JSON.stringify(cardsArr));
+}
 
 class Category {
   constructor () {
@@ -54,10 +60,12 @@ class Category {
       cardFront.addEventListener('click', () => {
         if (!state.play) {
           cardAudio.play();
+          word.trained += 1;
+          localStorage.setItem('statistics', JSON.stringify(cardsArr));
         }
         if (state.play && state.gameActive) {
           const event = new CustomEvent("cardClicked", {bubbles: true,
-            detail: { wordCard },});
+            detail: { wordCard, word, cardsArr },});
           wordCard.dispatchEvent(event);
         }
       });
@@ -66,6 +74,9 @@ class Category {
         e.stopPropagation();
         cardFront.classList.add('card__front--rotate');
         cardBack.classList.add('card__back--rotate');
+
+        word.trained += 1;
+        localStorage.setItem('statistics', JSON.stringify(cardsArr));
       })
 
       wordCard.addEventListener('mouseleave', () => {

@@ -1,12 +1,18 @@
-import Cards from './cards';
-
 const container = document.querySelector('#main-container');
 
-const cardsArr = Cards[1];
-
 class Stats {
+  constructor () {
+    this.cardsArr = [];
+  }
+
+  getStatistics () {
+    this.cardsArr = JSON.parse(localStorage.getItem('statistics'))
+  }
+
   loadStatsPage () {
     container.innerHTML = '';
+
+    this.getStatistics();
     
     const statsTable = document.createElement('table');
     statsTable.classList.add('stats-table');
@@ -25,10 +31,13 @@ class Stats {
 
     statsTable.append(tableRow);
 
-    cardsArr.forEach(group => {
+    this.cardsArr.forEach(group => {
       group.forEach(word => {
         const tableRow = document.createElement('tr');
         tableRow.classList.add('stats-table__row');
+
+        word['%'] = parseInt((1 - word.errors / (word.correct + word.errors)) * 100);
+        if (isNaN(word['%'])) word['%'] = 0;
 
         for (const prop in word) {
           if (tableHeaders.includes(prop)) {

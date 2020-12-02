@@ -30,6 +30,10 @@
   text-shadow: 0px 1px 1px #A62800;
 
   @include bigPhones {
+    font-size: 40px;
+  }
+
+  @include phones {
     font-size: 35px;
   }
 }
@@ -114,11 +118,7 @@
   text-transform: uppercase;
   font-weight: 600;
   color: #fff;
-
-  @include bigPhones {
-    margin-left: auto;
-    margin-right: auto;
-  }
+  margin-right: 20px;
 
   @include phones {
     transform: scale(.9);
@@ -164,7 +164,7 @@
     width: 45px;
     height: 45px;
     background-color: #fff;
-    border-radius: 100%;
+    border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     margin-left: 100px;
     transition: margin 0.4s;
@@ -221,6 +221,37 @@
 
 .toggle__input:checked + .toggle__label .toggle__mode--train {
   display: none;
+}
+
+.header__btns {
+  display: flex;
+  align-items: center;
+
+  @include bigPhones {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.stats-btn {
+  background-color: #FF7B40;
+  color: #fff;
+  font-family: Montserrat, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  height: 45px;
+  padding: 0 15px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  line-height: 1.6;
+  user-select: none;
+  transition: .3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken(#FF7B40, 10);
+  }
 }
 
 .cards__list {
@@ -551,6 +582,40 @@
 
 .game-info {
   text-align: center;
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.stats-wrap {
+  width: 100%;
+  margin-bottom: 30px;
+  overflow-x: auto;
+}
+
+.stats-table {
+  width: 100%;
+  min-width: 550px;
+  background: #c7fbff30;
+  color: #fff;
+  border-collapse: collapse;
+
+}
+
+.stats-table__header {
+  padding: 5px 20px;
+  font-size: 16px;
+  background-color: #FF9473;
+  text-align: center;
+  font-family: Montserrat, Arial, sans-serif;
+  border: 1px solid #dddddd;
+  text-transform: capitalize;
+}
+
+.stats-table__cell {
+  padding: 5px 20px;
+  color: #50026E;
+  font-family: "Open Sans", "Arial", sans-serif;
+  font-size: 16px;
+  border: 1px solid #dddddd;
+  
 }

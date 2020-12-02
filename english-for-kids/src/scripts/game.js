@@ -29,7 +29,7 @@ class Game {
           this.addStar('star');
 
           if (this.isGameFinished()) {
-            this.finishGame();
+            setTimeout(this.finishGame, 500);
           } else {
             setTimeout(this.playCurrentSound, 500);
           }

@@ -1,5 +1,6 @@
 import Cards from './cards';
 import categoryInstance from './category';
+import stats from './statistics';
 import menuInstance from './menu';
 import Icon from '../assets/img/icons/abc.png';
 import state from './state';
@@ -10,6 +11,7 @@ const pageTitle = document.querySelector('#page-title-text');
 const categoriesArr = Cards[0];
 const header = document.querySelector('.header');
 const footer = document.querySelector('.footer');
+const statsBtn = document.querySelector('.stats-btn');
 
 class MainPage {
   init() {
@@ -47,6 +49,10 @@ class MainPage {
       categoriesList.append(categoryCard);
       container.append(categoriesList);
     });
+
+    statsBtn.addEventListener('click', () => {
+      stats.loadStatsPage();
+    })
   }
 }
 

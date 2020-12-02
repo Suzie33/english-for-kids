@@ -7,3 +7,4 @@ import './scripts/category';
 import './scripts/menu';
 import './scripts/toggle';
 import './scripts/game';
+import './scripts/statistics';

@@ -46,9 +46,14 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    @include phones {
+    @include bigPhones {
       flex-wrap: wrap;
       row-gap: 15px;
+      column-gap: 20px;
+    }
+
+    @include phones {
+      column-gap: 5px;
     }
   }
 

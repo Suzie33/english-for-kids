@@ -1,3 +1,5 @@
+import Cards from './cards';
+
 const container = document.querySelector('#main-container');
 
 class Stats {
@@ -6,7 +8,11 @@ class Stats {
   }
 
   getStatistics () {
-    this.cardsArr = JSON.parse(localStorage.getItem('statistics'))
+    this.cardsArr = JSON.parse(localStorage.getItem('statistics'));
+
+    if (localStorage.getItem('statistics') === null) {
+      this.cardsArr = Cards[1];
+    }
   }
 
   loadStatsPage () {
@@ -58,6 +64,39 @@ class Stats {
     tableWrap.append(statsTable);
 
     container.append(tableWrap);
+
+    this.renderBtns();
+  }
+
+  renderBtns () {
+    const statsBtns = document.createElement('div');
+    statsBtns.classList.add('stats-btns');
+    const repeatBtn = document.createElement('button');
+    repeatBtn.classList.add('stats-btns__repeat');
+    repeatBtn.textContent = 'Repeat difficult words';
+    const resetBtn = document.createElement('button');
+    resetBtn.classList.add('stats-btns__reset');
+    resetBtn.textContent = 'Reset';
+
+    resetBtn.addEventListener('click', () => {
+      localStorage.removeItem('statistics');
+
+      Cards[1].forEach(group => {
+        group.forEach(word => {
+          word.trained = 0;
+          word.correct = 0;
+          word.errors = 0;
+          word['%'] = 0;
+        })
+      })
+
+      this.loadStatsPage();
+    })
+
+    statsBtns.append(repeatBtn);
+    statsBtns.append(resetBtn);
+
+    container.prepend(statsBtns);
   }
 }
 

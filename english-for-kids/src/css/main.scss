@@ -617,5 +617,39 @@
   font-family: "Open Sans", "Arial", sans-serif;
   font-size: 16px;
   border: 1px solid #dddddd;
-  
+}
+
+.stats-btns {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  &__repeat,
+  &__reset {
+    padding: 12px 20px;
+    font-family: Montserrat, Arial, sans-serif;
+    background-color: #B564D4;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 20px;
+    transition: .3s;
+    outline: none;
+
+    &:hover {
+      background-color: darken(#B564D4, 10);
+    }
+  }
+
+  &__repeat {
+    margin-right: 10px;
+  }
+
+  &__reset {
+    background-color: #FF3D00;
+
+    &:hover {
+      background-color: darken(#FF3D00, 5);
+    }
+  }
 }

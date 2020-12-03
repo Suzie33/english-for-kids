@@ -100,7 +100,7 @@ class Category {
     //render additional elements
     this.stars = document.createElement('ul');
     this.stars.classList.add('stars');
-    container.insertBefore(this.stars, container.firstChild);
+    container.prepend(this.stars);
 
     this.renderBtns();
 
@@ -111,7 +111,7 @@ class Category {
   }
 
   renderBtns () {
-    container.insertBefore(btnsTemplate.content.cloneNode(true), container.firstChild);
+    container.prepend(btnsTemplate.content.cloneNode(true));
     this.btns = container.querySelector('.buttons');
 
     this.startButton = document.querySelector('.buttons__btn');

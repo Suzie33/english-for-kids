@@ -28,26 +28,28 @@ class Menu {
     navigation.append(categoryMenuItem);
     
     categoriesArr.forEach(category => {
-      const categoryMenuItem = document.createElement('li');
-      categoryMenuItem.classList.add('nav__item');
-    
-      const categoryMenuLink = document.createElement('a');
-      categoryMenuLink.classList.add('nav__link');
-      categoryMenuLink.setAttribute('href', '#');
-      categoryMenuLink.textContent = `${category.title}`;
-    
-      categoryMenuItem.append(categoryMenuLink);
-
-      categoryMenuItem.addEventListener('click', () => {
-        navigation.classList.toggle('nav--visible');
-        menuIcon.classList.toggle('menu-icon__toggle--open');
-        overlay.classList.toggle('overlay--visible');
-        document.body.classList.toggle('noScroll');
-    
-        categoryInstance.loadCategoryPage(category);
-        this.changeActiveLink(category.title);
-      });
-      navigation.append(categoryMenuItem);
+      if (category.isVisibleInMenu) {
+        const categoryMenuItem = document.createElement('li');
+        categoryMenuItem.classList.add('nav__item');
+      
+        const categoryMenuLink = document.createElement('a');
+        categoryMenuLink.classList.add('nav__link');
+        categoryMenuLink.setAttribute('href', '#');
+        categoryMenuLink.textContent = `${category.title}`;
+      
+        categoryMenuItem.append(categoryMenuLink);
+  
+        categoryMenuItem.addEventListener('click', () => {
+          navigation.classList.toggle('nav--visible');
+          menuIcon.classList.toggle('menu-icon__toggle--open');
+          overlay.classList.toggle('overlay--visible');
+          document.body.classList.toggle('noScroll');
+      
+          categoryInstance.loadCategoryPage(category);
+          this.changeActiveLink(category.title);
+        });
+        navigation.append(categoryMenuItem);
+      }
     })
     
     menuIcon.addEventListener('click', () => {

@@ -3,41 +3,55 @@ const cards = [
     title: 'Animals 1',
     img: '../src/assets/img/horse.jpg',
     index: 0,
+    isVisibleInMenu: true,
   },
   {
     title: 'Animals 2',
     img: '../src/assets/img/turtle.jpg',
     index: 1,
+    isVisibleInMenu: true,
   },
   {
     title: 'Clothes',
     img: '../src/assets/img/blouse.jpg',
     index: 2,
+    isVisibleInMenu: true,
   },
   {
     title: 'Emotions',
     img: '../src/assets/img/happy.jpg',
     index: 3,
+    isVisibleInMenu: true,
   },
   {
     title: 'Vegetables',
     img: '../src/assets/img/pumpkin.jpg',
     index: 4,
+    isVisibleInMenu: true,
   },
   {
     title: 'Fruits',
     img: '../src/assets/img/banana.jpg',
     index: 5,
+    isVisibleInMenu: true,
   },
   {
     title: 'Nature',
     img: '../src/assets/img/forest.jpg',
     index: 6,
+    isVisibleInMenu: true,
   },
   {
     title: 'City',
     img: '../src/assets/img/road.jpg',
     index: 7,
+    isVisibleInMenu: true,
+  },
+  {
+    title: 'Repeat',
+    img: '',
+    index: 8,
+    isVisibleInMenu: false,
   },
   ],
   [
@@ -760,6 +774,8 @@ const cards = [
         errors: 0,
         '%': 0,
       },
+    ],
+    [
     ],
   ]
 ];

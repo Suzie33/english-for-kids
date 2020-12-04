@@ -1,21 +1,39 @@
 import Cards from './cards';
+import categoryInstance from './category';
 
 const container = document.querySelector('#main-container');
+const pageTitle = document.querySelector('#page-title-text');
+let cardsWords = Cards[1];
 
 class Stats {
-  constructor () {
-    this.cardsArr = [];
-  }
-
   getStatistics () {
-    this.cardsArr = JSON.parse(localStorage.getItem('statistics'));
+    cardsWords = JSON.parse(localStorage.getItem('statistics'));
 
-    if (localStorage.getItem('statistics') === null) {
-      this.cardsArr = Cards[1];
+    if (!cardsWords) {
+      cardsWords = Cards[1];
+    } else {
+      const filteredArr = cardsWords[cardsWords.length - 1];
+      filteredArr.forEach(card => {
+        for (let i = 0; i < cardsWords.length - 1; i++) {
+          for (let j = 0; j < cardsWords[i].length; j++) {
+            if (cardsWords[i][j].word === card.word) {
+              cardsWords[i][j].trained = card.trained;
+              cardsWords[i][j].correct = card.correct;
+              cardsWords[i][j].errors = card.errors;
+              cardsWords[i][j]['%'] = parseInt((1 - cardsWords[i][j].errors / (cardsWords[i][j].correct + cardsWords[i][j].errors)) * 100);
+              if (isNaN(cardsWords[i][j]['%'])) cardsWords[i][j]['%'] = 0;
+            }
+          }
+        }
+      })
+      cardsWords[cardsWords.length - 1] = [];
+      localStorage.setItem('statistics', JSON.stringify(cardsWords));
+      console.log(filteredArr, cardsWords[cardsWords.length - 1]);
     }
   }
 
   loadStatsPage () {
+    pageTitle.textContent = `Statistics`;
     container.innerHTML = '';
 
     this.getStatistics();
@@ -37,7 +55,7 @@ class Stats {
 
     statsTable.append(tableRow);
 
-    this.cardsArr.forEach(group => {
+    cardsWords.forEach(group => {
       group.forEach(word => {
         const tableRow = document.createElement('tr');
         tableRow.classList.add('stats-table__row');
@@ -79,9 +97,7 @@ class Stats {
     resetBtn.textContent = 'Reset';
 
     resetBtn.addEventListener('click', () => {
-      localStorage.removeItem('statistics');
-
-      Cards[1].forEach(group => {
+      cardsWords.forEach(group => {
         group.forEach(word => {
           word.trained = 0;
           word.correct = 0;
@@ -90,7 +106,34 @@ class Stats {
         })
       })
 
+      localStorage.setItem('statistics', JSON.stringify(cardsWords));
+
       this.loadStatsPage();
+    })
+
+    repeatBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      const filteredArr = [];
+
+      for (let i = 0; i < cardsWords.length - 1; i++) {
+        for (let j = 0; j < cardsWords[i].length; j++) {
+          if (cardsWords[i][j]['%'] !== 0 && cardsWords[i][j]['%'] !== 100) {
+            filteredArr.push(cardsWords[i][j]);
+          }
+        }
+      }
+
+      cardsWords = JSON.parse(localStorage.getItem('statistics'));
+      cardsWords.splice(-1, 1, filteredArr);
+      localStorage.setItem('statistics', JSON.stringify(cardsWords));
+
+      categoryInstance.loadCategoryPage({
+        title: 'Repeat',
+        img: '',
+        index: 8,
+        isVisibleInMenu: false,
+      })
     })
 
     statsBtns.append(repeatBtn);

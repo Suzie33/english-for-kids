@@ -7,12 +7,6 @@ const pageTitle = document.querySelector('#page-title-text');
 let cardsArr = Cards[1];
 const btnsTemplate = document.querySelector('#btnsTemplate');
 
-if (localStorage.getItem('statistics')) {
-  cardsArr = JSON.parse(localStorage.getItem('statistics'));
-} else {
-  localStorage.setItem('statistics', JSON.stringify(cardsArr));
-}
-
 class Category {
   constructor () {
     this.btns = null;
@@ -33,6 +27,12 @@ class Category {
     this.audioList = [];
     this.cardsList = document.createElement('ul');
     this.cardsList.classList.add('cards__list');
+
+    if (localStorage.getItem('statistics')) {
+      cardsArr = JSON.parse(localStorage.getItem('statistics'));
+    } else {
+      localStorage.setItem('statistics', JSON.stringify(cardsArr));
+    }
 
     const wordsList = cardsArr[category.index];
 

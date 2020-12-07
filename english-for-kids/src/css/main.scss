@@ -609,6 +609,22 @@
   font-family: Montserrat, Arial, sans-serif;
   border: 1px solid #dddddd;
   text-transform: capitalize;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #FF3D00;
+  }
+
+  &--ascend:after {
+    content: '▲';
+  }
+
+  &--descend:after {
+    content: '▼';
+  }
+
+
 }
 
 .stats-table__cell {

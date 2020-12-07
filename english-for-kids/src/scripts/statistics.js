@@ -28,7 +28,6 @@ class Stats {
       })
       cardsWords[cardsWords.length - 1] = [];
       localStorage.setItem('statistics', JSON.stringify(cardsWords));
-      console.log(filteredArr, cardsWords[cardsWords.length - 1]);
     }
   }
 
@@ -46,10 +45,52 @@ class Stats {
 
     const tableHeaders = ['category', 'word', 'translation', 'trained', 'correct', 'errors', '%'];
 
-    tableHeaders.forEach(item => {
+    tableHeaders.forEach((item, i) => {
       const tableHeader = document.createElement('th');
       tableHeader.classList.add('stats-table__header');
       tableHeader.textContent = `${item}`;
+      tableHeader.setAttribute('title', 'Press to sort');
+      
+      tableHeader.addEventListener('click', () => {
+        const headers = statsTable.querySelectorAll('.stats-table__header');
+        
+        
+        headers.forEach(item => {
+          item.classList.remove('stats-table__header--ascend');
+          item.classList.remove('stats-table__header--descend');
+        })
+
+        if (tableHeader.getAttribute('data-sorted') === null) {
+          tableHeader.setAttribute('data-sorted', 'descend');
+          tableHeader.classList.add('stats-table__header--descend');
+
+          const sortedRows = Array.from(statsTable.rows)
+            .slice(1)
+            .sort((rowA, rowB) => rowA.cells[i].innerHTML > rowB.cells[i].innerHTML ? 1 : -1);
+
+          statsTable.append(...sortedRows);
+        } else if (tableHeader.getAttribute('data-sorted') === 'descend') {
+          tableHeader.setAttribute('data-sorted', 'ascend');
+          tableHeader.classList.add('stats-table__header--ascend');
+
+          const sortedRows = Array.from(statsTable.rows)
+            .slice(1)
+            .sort((rowA, rowB) => rowA.cells[i].innerHTML < rowB.cells[i].innerHTML ? 1 : -1);
+
+          statsTable.append(...sortedRows);
+        } else if (tableHeader.getAttribute('data-sorted') === 'ascend') {
+          tableHeader.setAttribute('data-sorted', 'descend');
+          tableHeader.classList.add('stats-table__header--descend');
+
+          const sortedRows = Array.from(statsTable.rows)
+            .slice(1)
+            .sort((rowA, rowB) => rowA.cells[i].innerHTML > rowB.cells[i].innerHTML ? 1 : -1);
+
+          statsTable.append(...sortedRows);
+        }
+
+      })
+
       tableRow.append(tableHeader);
     })
 

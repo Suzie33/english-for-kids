@@ -11,4 +11,4 @@ toggle.addEventListener('change', (e) => {
   if (state.page !== 0) {
     categoryInstance.changeMode(state.play);
   }
-})
+});

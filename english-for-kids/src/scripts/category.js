@@ -8,7 +8,7 @@ let cardsArr = Cards[1];
 const btnsTemplate = document.querySelector('#btnsTemplate');
 
 class Category {
-  constructor () {
+  constructor() {
     this.btns = null;
     this.startButton = null;
     this.stars = null;
@@ -23,7 +23,7 @@ class Category {
     pageTitle.textContent = `${category.title}`;
     container.innerHTML = '';
 
-    //render cards
+    // render cards
     this.audioList = [];
     this.cardsList = document.createElement('ul');
     this.cardsList.classList.add('cards__list');
@@ -42,9 +42,9 @@ class Category {
       wordCard.append(cardTemplate.content.cloneNode(true));
 
       const cardImg = wordCard.querySelectorAll('.card__img');
-      cardImg.forEach(card => {
+      cardImg.forEach((card) => {
         card.setAttribute('src', `${word.image}`);
-      })
+      });
       const cardAudio = wordCard.querySelector('.card__audio');
       cardAudio.setAttribute('src', `${word.audioSrc}`);
       this.audioList.push(cardAudio);
@@ -64,8 +64,10 @@ class Category {
           localStorage.setItem('statistics', JSON.stringify(cardsArr));
         }
         if (state.play && state.gameActive) {
-          const event = new CustomEvent("cardClicked", {bubbles: true,
-            detail: { wordCard, word, cardsArr },});
+          const event = new CustomEvent('cardClicked', {
+            bubbles: true,
+            detail: { wordCard, word, cardsArr },
+          });
           wordCard.dispatchEvent(event);
         }
       });
@@ -77,27 +79,27 @@ class Category {
 
         word.trained += 1;
         localStorage.setItem('statistics', JSON.stringify(cardsArr));
-      })
+      });
 
       wordCard.addEventListener('mouseleave', () => {
         cardFront.classList.remove('card__front--rotate');
         cardBack.classList.remove('card__back--rotate');
-      })
+      });
 
       this.cardsList.append(wordCard);
       container.append(this.cardsList);
-    })
-    
+    });
+
     this.wordCards = this.cardsList.querySelectorAll('.card--word');
-    
+
     if (state.play) {
-      this.wordCards.forEach(card => {
+      this.wordCards.forEach((card) => {
         card.classList.add('card--play');
-      })
+      });
       this.generateRandomArr();
     }
 
-    //render additional elements
+    // render additional elements
     this.stars = document.createElement('ul');
     this.stars.classList.add('stars');
     container.prepend(this.stars);
@@ -110,7 +112,7 @@ class Category {
     }
   }
 
-  renderBtns () {
+  renderBtns() {
     container.prepend(btnsTemplate.content.cloneNode(true));
     this.btns = container.querySelector('.buttons');
 
@@ -120,22 +122,22 @@ class Category {
       if (this.startButton.classList.contains('buttons__repeat') === false) {
         this.startButton.classList.add('buttons__repeat');
 
-        const event = new CustomEvent("gameStarted", {bubbles: true});
+        const event = new CustomEvent('gameStarted', { bubbles: true });
         this.startButton.dispatchEvent(event);
       } else {
         state.randomArr[state.currentCard].play();
       }
-    })
+    });
   }
 
   changeMode(mode) {
-    this.wordCards.forEach(card => {
+    this.wordCards.forEach((card) => {
       if (mode) {
         card.classList.add('card--play');
       } else {
         card.classList.remove('card--play');
       }
-    })
+    });
 
     if (mode && container.classList.contains('container--category')) {
       this.btns.classList.remove('buttons--hidden');
@@ -151,7 +153,7 @@ class Category {
     }
   }
 
-  generateRandomArr () {
+  generateRandomArr() {
     const arr = this.audioList;
     const randomArr = arr.sort(() => Math.random() - 0.5);
     this.audioList = randomArr;

@@ -2,10 +2,21 @@
 @import "./media.scss";
 @import "./base.scss";
 
+:root {
+  --red: #FF3D00;
+  --red-dark: #A62800;
+  --orange: #FF6E40;
+  --orange-light: #FF9473;
+  --purple: #B564D4;
+  --dark: #50026E;
+  --white: #fff;
+  --gray: #dddddd;
+}
+
 .header {
   margin-bottom: 45px;
   padding-top: 25px;
-  color: #FF7B40;
+  color: var(--orange);
 
   @include bigPhones {
     margin-bottom: 35px;
@@ -27,7 +38,7 @@
 
 .logo__link {
   font-size: 55px;
-  text-shadow: 0px 1px 1px #A62800;
+  text-shadow: 0px 1px 1px var(--red-dark);
 
   @include bigPhones {
     font-size: 40px;
@@ -66,7 +77,7 @@
     left: 0;
     transform: rotate(0deg);
     transition: 0.25s ease-in-out;
-    background-color: #50026E;
+    background-color: var(--dark);
 
     &:nth-child(1) {
       top: 0;
@@ -84,11 +95,10 @@
 
   &--open {
     z-index: 7;
-    transform: translate(270px, 0px);
     transition: .5s;
 
     & span {
-      background-color: #fff;
+      background-color: var(--white);
 
       &:nth-child(1),
       &:nth-child(4) {
@@ -105,10 +115,6 @@
         transform: rotate(-45deg);
       }
     }
-
-    @include phones {
-      transform: translate(250px, 0px);
-    }
   }
 }
 
@@ -117,7 +123,7 @@
   font-family: Montserrat, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 600;
-  color: #fff;
+  color: var(--white);
   margin-right: 20px;
 
   @include phones {
@@ -139,7 +145,7 @@
   user-select: none;
   width: 145px;
   height: 45px;
-  background-color: #dddddd;
+  background-color: var(--gray);
   border-radius: 25px;
 
   &:before,
@@ -154,7 +160,7 @@
 
   &::before {
     right: 1px;
-    background-color: #B564D4;
+    background-color: var(--purple);
     border-radius: 60px;
     transition: background 0.4s;
   }
@@ -163,7 +169,7 @@
     top: -1px;
     width: 45px;
     height: 45px;
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 50%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     margin-left: 100px;
@@ -203,7 +209,7 @@
 }
 
 .toggle__input:checked + .toggle__label::before {
-  background-color: #FF9473;
+  background-color: var(--orange-light);
 }
 
 .toggle__input:checked + .toggle__label::after {
@@ -235,7 +241,7 @@
 
 .stats-btn {
   background-color: #FF7B40;
-  color: #fff;
+  color: var(--white);
   font-family: Montserrat, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 600;
@@ -324,7 +330,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: var(--white);
 
   &--word {
     position: relative;
@@ -400,15 +406,17 @@
   transition: left .5s;
   z-index: 5;
 
-  background-color: #FF9473;
+  background-color: var(--orange-light);
   text-transform: uppercase;
   font-family: Montserrat, Arial, sans-serif;
   font-size: 25px;
   font-weight: 700;
-  color: #fff;
+  color: var(--white);
 
   @include phones {
     width: 320px;
+    padding-top: 70px;
+    padding-bottom: 10px;
   }
 
   &--visible {
@@ -417,9 +425,12 @@
 }
 
 .nav__item {
-  margin-bottom: 20px;
+  padding-bottom: 3px;
+  margin-bottom: 17px;
   line-height: 1.3;
   transition: .3s;
+  display: flex;
+  align-items: center;
 
   &:last-child {
     margin-bottom: 0;
@@ -435,7 +446,7 @@
 
 
   &--active {
-    border-bottom: 3px solid #fff;
+    border-bottom: 3px solid var(--white);
 
     &:hover {
       transform: scale(1);
@@ -443,10 +454,16 @@
   }
 }
 
+.nav__icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+}
+
 .footer {
   padding: 15px 0;
-  background-color: #FF6E40;
-  color: #fff;
+  background-color: var(--orange);
+  color: var(--white);
   font-family: Montserrat, Arial, sans-serif;
   
 }
@@ -502,8 +519,8 @@
     font-weight: 700;
     font-size: 20px;
     padding: 16px 25px;
-    background: linear-gradient(40deg,#B564D4,#FF6E40);
-    color: #fff;
+    background: linear-gradient(40deg,var(--purple),var(--orange));
+    color: var(--white);
     border-radius: 10px;
     outline: none;
     transition: .2s;
@@ -526,7 +543,7 @@
     width: 65px;
     height: 65px;
     font-size: 0;
-    background-image: url('../assets/img/icons/repeat.svg'), linear-gradient(40deg,#B564D4,#FF6E40);
+    background-image: url('../assets/img/icons/repeat.svg'), linear-gradient(40deg,var(--purple),var(--orange));
     border-radius: 50%;
     background-repeat: no-repeat;
     background-size: 32px 32px, cover;
@@ -596,24 +613,23 @@
   width: 100%;
   min-width: 550px;
   background: #c7fbff30;
-  color: #fff;
+  color: var(--white);
   border-collapse: collapse;
-
 }
 
 .stats-table__header {
   padding: 5px 20px;
   font-size: 16px;
-  background-color: #FF9473;
+  background-color: var(--orange-light);
   text-align: center;
   font-family: Montserrat, Arial, sans-serif;
-  border: 1px solid #dddddd;
+  border: 1px solid var(--gray);
   text-transform: capitalize;
   user-select: none;
 
   &:hover {
     cursor: pointer;
-    background-color: #FF3D00;
+    background-color: var(--red);
   }
 
   &--ascend:after {
@@ -623,16 +639,18 @@
   &--descend:after {
     content: '▼';
   }
-
-
 }
 
 .stats-table__cell {
   padding: 5px 20px;
-  color: #50026E;
+  color: var(--dark);
   font-family: "Open Sans", "Arial", sans-serif;
   font-size: 16px;
-  border: 1px solid #dddddd;
+  border: 1px solid var(--gray);
+
+  @include phones {
+    font-size: 15px;
+  }
 }
 
 .stats-btns {
@@ -645,9 +663,9 @@
   &__reset {
     padding: 12px 20px;
     font-family: Montserrat, Arial, sans-serif;
-    background-color: #B564D4;
+    background-color: var(--purple);
     font-weight: 700;
-    color: #fff;
+    color: var(--white);
     border-radius: 20px;
     transition: .3s;
     outline: none;
@@ -662,10 +680,14 @@
   }
 
   &__reset {
-    background-color: #FF3D00;
+    background-color: var(--red);
 
     &:hover {
       background-color: darken(#FF3D00, 5);
     }
+  }
+
+  @include phones {
+    font-size: 14px;
   }
 }

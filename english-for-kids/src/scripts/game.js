@@ -1,5 +1,6 @@
 import state from './state';
 import mainPage from './mainPage';
+import menuInstance from './menu';
 
 const audioError = document.querySelector('.audio-error');
 const audioCorrect = document.querySelector('.audio-correct');
@@ -10,17 +11,17 @@ const header = document.querySelector('.header');
 const footer = document.querySelector('.footer');
 
 class Game {
-  init () {
-    document.addEventListener('gameStarted', ()=> {
+  init() {
+    document.addEventListener('gameStarted', () => {
       state.gameActive = true;
       this.playCurrentSound();
-    })
-    
+    });
+
     document.addEventListener('cardClicked', (e) => {
       const targetSrc = state.randomArr[state.currentCard].src;
-      const clickedCard = e.detail.wordCard.querySelector('.card')
+      const clickedCard = e.detail.wordCard.querySelector('.card');
       const clickedCardAudioSrc = e.detail.wordCard.querySelector('audio').src;
-    
+
       if (clickedCard.classList.contains('card--disabled') === false) {
         if (clickedCardAudioSrc === targetSrc) {
           audioCorrect.play();
@@ -44,25 +45,25 @@ class Game {
           localStorage.setItem('statistics', JSON.stringify(e.detail.cardsArr));
         }
       }
-    })
+    });
   }
 
-  playCurrentSound () {
+  playCurrentSound() {
     state.randomArr[state.currentCard].play();
   }
 
-  addStar (starClass) {
+  addStar(starClass) {
     const starsContainer = document.querySelector('.stars');
     const star = document.createElement('li');
     star.classList.add(`${starClass}`);
     starsContainer.append(star);
   }
 
-  isGameFinished () {
+  isGameFinished() {
     return state.currentCard === state.randomArr.length;
   }
 
-  finishGame () {
+  finishGame() {
     header.style.visibility = 'hidden';
     footer.style.visibility = 'hidden';
     container.innerHTML = '';
@@ -76,14 +77,18 @@ class Game {
     if (state.gameErrors === 0) {
       audioSuccess.play();
 
-      gameInfo.textContent = `You did it!`;
+      gameInfo.textContent = 'You did it!';
       gamePicture.classList.add('game-success');
       gameResult.append(gameInfo);
       gameResult.append(gamePicture);
     } else {
       audioFailure.play();
 
-      gameInfo.textContent = `You made ${state.gameErrors} mistakes. Try again!`;
+      if (state.gameErrors === 1) {
+        gameInfo.textContent = 'You made 1 mistake. Try again!';
+      } else {
+        gameInfo.textContent = `You made ${state.gameErrors} mistakes. Try again!`;
+      }
       gamePicture.classList.add('game-failure');
       gameResult.append(gameInfo);
       gameResult.append(gamePicture);
@@ -91,12 +96,12 @@ class Game {
     container.append(gameResult);
 
     setTimeout(mainPage.loadMainPage, 4000);
+    menuInstance.changeActiveLink('Main page');
     state.gameActive = false;
     state.randomArr = [];
     state.currentCard = 0;
     state.gameErrors = 0;
   }
-
 }
 
 const game = new Game();

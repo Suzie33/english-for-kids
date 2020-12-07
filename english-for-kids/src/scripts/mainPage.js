@@ -36,17 +36,17 @@ class MainPage {
         const categoryCard = document.createElement('li');
         categoryCard.classList.add('cards__item');
         categoryCard.append(categoryCardTemplate.content.cloneNode(true));
-      
+
         const cardImg = categoryCard.querySelector('.card__img');
         cardImg.setAttribute('src', `${category.img}`);
         const cardTitle = categoryCard.querySelector('.card__title');
         cardTitle.textContent = `${category.title}`;
-      
+
         categoryCard.addEventListener('click', () => {
           categoryInstance.loadCategoryPage(category);
           menuInstance.changeActiveLink(category.title);
-        })
-      
+        });
+
         categoriesList.append(categoryCard);
         container.append(categoriesList);
       }
@@ -55,7 +55,7 @@ class MainPage {
     statsBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       stats.loadStatsPage();
-    })
+    });
   }
 }
 
